@@ -15,3 +15,8 @@ It has no dependencies to Apple frameworks like Foundation or AppKit so it can b
 ```shell
 swift build
 ```
+## Run
+
+```shell
+.build/debug/Radio
+```
