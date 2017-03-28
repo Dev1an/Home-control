@@ -1,0 +1,12 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "Cmpv",
+      "reason": null,
+      "repositoryURL": "https://github.com/Dev1an/Cmpv.git",
+      "version": "0.1.0"
+    }
+  ],
+  "version": 1
+}

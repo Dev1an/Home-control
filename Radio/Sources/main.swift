@@ -1,11 +1,11 @@
 import Cmpv
 
-func check(error: Int32) {
+func check(error: Int32, message: String? = nil) {
 	if (error < 0) {
 		print("mpv API error:", String(cString: mpv_error_string(error)));
 		exit(1);
-	} else {
-		print("OK")
+	} else if let message = message {
+		print(message)
 	}
 }
 
@@ -18,13 +18,10 @@ playRadioMaria[0] = UnsafePointer<Int8>(loadFile)
 playRadioMaria[1] = UnsafePointer<Int8>(radioMaria)
 playRadioMaria[2] = nil
 
-print(String(cString: playRadioMaria[0]!))
-print(String(cString: playRadioMaria[1]!))
-
-check(error: mpv_initialize(handle))
-
-check(error: mpv_command(handle, playRadioMaria))
+check(error: mpv_initialize(handle), message: "Initialising mpv")
+check(error: mpv_command(handle, playRadioMaria), message: "Play radio maria")
 
 while true {
-	print(mpv_wait_event(handle, 2).pointee.event_id)
+	let eventID = mpv_wait_event(handle, Double.greatestFiniteMagnitude).pointee.event_id.rawValue
+	print(Event(rawValue: eventID) ?? "Unknown event")
 }
