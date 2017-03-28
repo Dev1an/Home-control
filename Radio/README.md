@@ -1,5 +1,7 @@
 # Radio
-A simple internet radio player (currently only plays Radio Maria België).
+A command-line internet radio player (currently only plays Radio Maria België).
+
+It has no dependencies to Apple frameworks like Foundation or AppKit so it can be used on any platform supporting swift and mpv.
 
 ## Requirements
 
