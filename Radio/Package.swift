@@ -1,7 +1,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Home control",
+    name: "Radio",
     dependencies: [
 		.Package(url: "../Cmpv", majorVersion: 0)
 	]
