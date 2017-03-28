@@ -6,7 +6,7 @@ It has no dependencies to Apple frameworks like Foundation or AppKit so it can b
 ## Requirements
 
 - [Swift](https://swift.org/download/#releases)
-- [libmpv](mpv.io)
+- [libmpv](https://mpv.io)
   - Ubuntu: `sudo apt install libmpv-dev`
   - macOS: `brew install mpv`
 
