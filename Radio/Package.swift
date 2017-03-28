@@ -3,6 +3,6 @@ import PackageDescription
 let package = Package(
     name: "Radio",
     dependencies: [
-		.Package(url: "../Cmpv", majorVersion: 0)
+		.Package(url: "https://github.com/Dev1an/Cmpv.git", majorVersion: 0, minor: 1)
 	]
 )
