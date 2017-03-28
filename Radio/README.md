@@ -12,8 +12,6 @@ It has no dependencies to Apple frameworks like Foundation or AppKit so it can b
 
 ## Build
 
-### macOS
-
 ```shell
-swift build -Xlinker -L/usr/local/lib/
+swift build
 ```
