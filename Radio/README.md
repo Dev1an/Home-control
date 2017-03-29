@@ -19,7 +19,7 @@ It uses `<linux/input.h>` to catch global keyboard events, so it only works on L
     - ./use-ffmpeg-release
     - ./update
     - ./rebuild -j4
-    - shell `sudo ./install`
+    - sudo ./install
 ## Build
 
 ```shell
