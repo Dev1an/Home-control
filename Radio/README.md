@@ -1,7 +1,7 @@
 # Radio
 A command-line internet radio player (currently only plays Radio Maria België).
 
-It has no dependencies to Apple frameworks like Foundation or AppKit so it can be used on any platform supporting swift and mpv.
+It uses <linux/input.h> to catch global keyboard events, so it only works on Linux for the moment.
 
 ## Requirements
 
