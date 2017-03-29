@@ -1,43 +1,49 @@
 import Cmpv
 import InputEvents
-import Dispatch
 
-func check(error: Int32, message: String? = nil) {
-	if (error < 0) {
-		print("mpv API error:", String(cString: mpv_error_string(error)));
-		exit(1);
-	} else if let message = message {
-		print(message)
+do {
+	var radio = try Radio()
+	
+	let radioMaria = "http://stream.radiomaria.be/RadioMaria-96.m3u"
+	let klaraContinuo = "http://mp3.streampower.be/klaracontinuo-high.mp3"
+	
+	do {
+		try radio.setChannel(to: radioMaria)
+	} catch RadioError.Mpv(let message) {
+		print("Unable to play radio maria")
 	}
-}
-
-var handle = mpv_create()
-
-let loadFile = [Int8]("loadfile".utf8CString)
-let radioMaria = [Int8]("http://stream.radiomaria.be/RadioMaria-96.m3u".utf8CString)
-let klaraContinuo = [Int8]("http://mp3.streampower.be/klaracontinuo-high.mp3".utf8CString)
-let playURL = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 3)
-playURL[0] = UnsafePointer<Int8>(loadFile)
-playURL[1] = UnsafePointer<Int8>(radioMaria)
-playURL[2] = nil
-
-check(error: mpv_initialize(handle), message: "Initialising mpv")
-check(error: mpv_command(handle, playURL), message: "Play radio maria")
-
-print("starting keyboard observer")
-
-if let keyboard = try? InputEventCenter(devicePath: "/dev/input/by-id/usb-flirc.tv_flirc-if01-event-kbd") {
-	keyboard.keyPressed = { keycode in
-		print("keyboard: ", keycode, "pressed")
-		if keycode == 60 || keycode == 61 {
-			if keycode == 60 {
-				playURL[1] = UnsafePointer<Int8>(radioMaria)
-			} else {
-				playURL[1] = UnsafePointer<Int8>(klaraContinuo)
+	
+	do {
+		print("trying to start keyboard observer")
+		let keyboard = try InputEventCenter(devicePath: "/dev/input/by-id/usb-flirc.tv_flirc-if01-event-kbd")
+		keyboard.keyPressed = { keycode in
+			do {
+				switch keycode {
+				case 60:
+					try radio.setChannel(to: klaraContinuo)
+				case 61:
+					try radio.setChannel(to: radioMaria)
+				case 14:
+					try radio.stop()
+				default:
+					print("key with code \(keycode) was pressed, but not assigned to an action")
+				}
+			} catch RadioError.Mpv(let message) {
+				print("Unable to change the radio")
+				print(message)
+			} catch {
+				assert(false)
 			}
-			check(error: mpv_command(handle, playURL))
 		}
+	} catch KeyboardError.CannotOpen(let fileDescriptor, let reason) {
+		print("An error occured while trying to observer the keyboard")
+		print("Unable to open the file descriptor", fileDescriptor)
+		print(reason)
 	}
+	
+} catch RadioError.Mpv(let message) {
+	print("Unable to initialise radio")
+	print(message)
 }
 
 print("\n")
@@ -48,8 +54,5 @@ print("\tPress F3 for Klara Continuo")
 print("- - - - - - - - - - - - - - - - - -")
 print("\n")
 
-
-while true {
-	let eventID = mpv_wait_event(handle, Double.greatestFiniteMagnitude).pointee.event_id.rawValue
-	print("mpv:", Event(rawValue: eventID) ?? "Unknown event")
-}
+import Dispatch
+dispatchMain()
