@@ -5,6 +5,8 @@ let device: String
 if CommandLine.arguments.count > 1 { device = CommandLine.arguments[1] }
 else { device = "/dev/input/by-id/usb-flirc.tv_flirc-if01-event-kbd" }
 
+print("using input device: ", device)
+
 do {
 	let radio = try Radio()
 	
