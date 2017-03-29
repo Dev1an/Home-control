@@ -2,10 +2,22 @@
   "autoPin": true,
   "pins": [
     {
+      "package": "CLinuxInput",
+      "reason": null,
+      "repositoryURL": "https://github.com/Dev1an/CLinuxInput.git",
+      "version": "1.0.0"
+    },
+    {
       "package": "Cmpv",
       "reason": null,
-      "repositoryURL": "https://github.com/Dev1an/Cmpv.git",
+      "repositoryURL": "https://github.com/Dev1an/Cmpv",
       "version": "1.0.0"
+    },
+    {
+      "package": "InputEvents",
+      "reason": null,
+      "repositoryURL": "https://github.com/Dev1an/InputEvents",
+      "version": "1.0.1"
     }
   ],
   "version": 1
