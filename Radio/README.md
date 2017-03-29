@@ -1,7 +1,7 @@
 # Radio
 A command-line internet radio player (currently only plays Radio Maria België).
 
-It uses <linux/input.h> to catch global keyboard events, so it only works on Linux for the moment.
+It uses `<linux/input.h>` to catch global keyboard events, so it only works on Linux for the moment.
 
 ## Requirements
 
