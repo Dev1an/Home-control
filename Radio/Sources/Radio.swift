@@ -39,6 +39,10 @@ class Radio {
 	func stop() throws {
 		try Radio.execute(mpv_command_string(handle, "stop"))
 	}
+	
+	func increaseVolume(value: Int8 = 2) throws {
+		try Radio.execute(mpv_command_string(handle, "add volume \(value)"))
+	}
 }
 
 enum RadioError: Error {
