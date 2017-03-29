@@ -19,11 +19,12 @@ class Radio {
 	}
 	
 	let handle = mpv_create()
+	let queue = DispatchQueue(label: "Radio event loop")
 	
 	init() throws {
 		try Radio.execute(mpv_initialize(handle))
 		
-		DispatchQueue(label: "Radio event loop").async {
+		queue.async {
 			while true {
 				let eventID = mpv_wait_event(self.handle, Double.greatestFiniteMagnitude).pointee.event_id.rawValue
 				print("mpv:", Event(rawValue: eventID) ?? "Unknown event")
