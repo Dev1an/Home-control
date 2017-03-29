@@ -10,13 +10,23 @@ It uses `<linux/input.h>` to catch global keyboard events, so it only works on L
   - Ubuntu: `sudo apt install libmpv-dev`
   - macOS: `brew install mpv`
 
+## Develop
+
+Generate xcode project to develop in Xcode
+
+```shell
+swift package generate-xcodeproj
+```
+
 ## Build
+
+**Debug**
 
 ```shell
 swift build
 ```
 
-### Release
+**Release**
 
 ```shell
 swift build -c release
