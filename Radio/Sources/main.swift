@@ -1,8 +1,12 @@
 import Cmpv
 import InputEvents
 
+let device: String
+if CommandLine.arguments.count > 1 { device = CommandLine.arguments[1] }
+else { device = "/dev/input/by-id/usb-flirc.tv_flirc-if01-event-kbd" }
+
 do {
-	var radio = try Radio()
+	let radio = try Radio()
 	
 	let radioMaria = "http://stream.radiomaria.be/RadioMaria-96.m3u"
 	let klaraContinuo = "http://mp3.streampower.be/klaracontinuo-high.mp3"
@@ -15,7 +19,7 @@ do {
 	
 	do {
 		print("trying to start keyboard observer")
-		let keyboard = try InputEventCenter(devicePath: "/dev/input/by-id/usb-flirc.tv_flirc-if01-event-kbd")
+		let keyboard = try InputEventCenter(devicePath: device)
 		keyboard.keyPressed = { keycode in
 			do {
 				switch keycode {
