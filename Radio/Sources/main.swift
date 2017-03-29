@@ -15,7 +15,7 @@ var handle = mpv_create()
 
 let loadFile = [Int8]("loadfile".utf8CString)
 let radioMaria = [Int8]("http://stream.radiomaria.be/RadioMaria-96.m3u".utf8CString)
-let klaraContinuo = [Int8]("http://mp3.streampower.be/klaracontinuo-mid.mp3".utf8CString)
+let klaraContinuo = [Int8]("http://mp3.streampower.be/klaracontinuo-high.mp3".utf8CString)
 let playURL = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 3)
 playURL[0] = UnsafePointer<Int8>(loadFile)
 playURL[1] = UnsafePointer<Int8>(radioMaria)
@@ -26,7 +26,7 @@ check(error: mpv_command(handle, playURL), message: "Play radio maria")
 
 print("starting keyboard observer")
 
-if let keyboard = try? InputEventCenter(devicePath: "/dev/input/event2") {
+if let keyboard = try? InputEventCenter(devicePath: "/dev/input/by-id/usb-flirc.tv_flirc-if01-event-kbd") {
 	keyboard.keyPressed = { keycode in
 		print("keyboard: ", keycode, "pressed")
 		if keycode == 60 || keycode == 61 {
