@@ -40,9 +40,9 @@ do {
 			}
 		}
 	} catch KeyboardError.CannotOpen(let fileDescriptor, let reason) {
-		print("An error occured while trying to observer the keyboard")
-		print("Unable to open the file descriptor", fileDescriptor)
-		print(reason)
+		print("An error occured while trying to observe the keyboard:")
+		print("\t>", "Unable to open the file descriptor", fileDescriptor)
+		print("\t>", reason)
 	}
 	
 } catch RadioError.Mpv(let message) {
