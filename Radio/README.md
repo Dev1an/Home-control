@@ -28,4 +28,4 @@ The radio executable takes one argument: the path to the remote.
 ```shell
 .build/debug/Radio /dev/input/event2
 ```
-Use the function keys to change the channel
+Use the function keys to change the channel, press <kbd>backspace</kbd> to stop playing.
