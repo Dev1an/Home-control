@@ -305,7 +305,7 @@ open class EventSource: NSObject, URLSessionDataDelegate {
 				if event[key as! String] != nil {
 					event[key as! String] = "\(event[key as! String]!)\n\(value!)"
 				} else {
-					event[key as! String] = value! as String
+					event[key as! String] = value! as! String
 				}
 			} else if key != nil && value == nil {
 				event[key as! String] = ""
