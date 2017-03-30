@@ -298,36 +298,28 @@ open class EventSource: NSObject, URLSessionDataDelegate {
     fileprivate func parseEvent(_ eventString: String) -> (id: String?, event: String?, data: String?) {
         var event = Dictionary<String, String>()
 
-        for line in eventString.components(separatedBy: CharacterSet.newlines) as [String] {
+        for line in eventString.components(separatedBy: CharacterSet.newlines) {
 			let (key, value) = self.parseKeyValuePair(line)
 
 			if key != nil && value != nil {
-				if event[key as! String] != nil {
-					event[key as! String] = "\(event[key as! String]!)\n\(value!)"
+				if event[key!] != nil {
+					event[key!] = "\(event[key as! String]!)\n\(value!)"
 				} else {
-					event[key as! String] = value! as! String
+					event[key!] = value! as! String
 				}
 			} else if key != nil && value == nil {
-				event[key as! String] = ""
+				event[key!] = ""
 			}
         }
 
         return (event["id"], event["event"], event["data"])
     }
 
-    fileprivate func parseKeyValuePair(_ line: String) -> (NSString?, NSString?) {
-        var key: NSString?, value: NSString?
-        let scanner = Scanner(string: line)
-        scanner.scanUpTo(":", into: &key)
-        scanner.scanString(":", into: nil)
-
-        for newline in validNewlineCharacters {
-            if scanner.scanUpTo(newline, into: &value) {
-                break
-            }
-        }
-
-        return (key, value)
+    fileprivate func parseKeyValuePair(_ line: String) -> (String?, String?) {
+		let stripped = line.components(separatedBy: .newlines).first
+		let keyValue = stripped?.components(separatedBy: ":")
+		
+		return (keyValue?.first, (keyValue?.count ?? 0)>1 ? keyValue![1] : nil)
     }
 
     fileprivate func parseRetryTime(_ eventString: String) -> Int? {
