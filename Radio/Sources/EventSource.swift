@@ -7,11 +7,6 @@ public enum EventSourceState {
     case closed
 }
 
-extension Error {
-	var code: Int { return (self as NSError).code }
-	var domain: String { return (self as NSError).domain }
-}
-
 open class EventSource: NSObject, URLSessionDataDelegate {
 	static let DefaultsKey = "com.inaka.eventSource.lastEventId"
 
@@ -181,7 +176,7 @@ open class EventSource: NSObject, URLSessionDataDelegate {
 			return
 		}
 
-        if error == nil || error!.code != -999 {
+        if error == nil || (error! as! NSError).code != NSURLErrorCancelled {
             let nanoseconds = Double(self.retryTime) / 1000.0
             let delayTime = DispatchTime.now() + nanoseconds
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
