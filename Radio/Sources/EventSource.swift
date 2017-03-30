@@ -301,11 +301,11 @@ open class EventSource: NSObject, URLSessionDataDelegate {
         for line in eventString.components(separatedBy: CharacterSet.newlines) {
 			let (key, value) = self.parseKeyValuePair(line)
 
-			if key != nil && value != nil {
-				if event[key!] != nil {
-					event[key!] = "\(event[key as! String]!)\n\(value!)"
+			if let key = key, let value = value {
+				if let oldEvent = event[key] {
+					event[key] = oldEvent + "\n" + value
 				} else {
-					event[key!] = value! as! String
+					event[key] = value
 				}
 			} else if key != nil && value == nil {
 				event[key!] = ""
@@ -316,11 +316,17 @@ open class EventSource: NSObject, URLSessionDataDelegate {
     }
 
     fileprivate func parseKeyValuePair(_ line: String) -> (String?, String?) {
-		let stripped = line.components(separatedBy: .newlines).first
-		let keyValue = stripped?.components(separatedBy: ":")
-		
-		return (keyValue?.first, (keyValue?.count ?? 0)>1 ? keyValue![1] : nil)
-    }
+		if let colon = line.rangeOfCharacter(from: [":"])?.lowerBound {
+			let key = line.substring(to: colon)
+			let value: String
+			let lineEnd = line.rangeOfCharacter(from: .newlines, range: colon..<line.endIndex)?.lowerBound
+				value = line.substring(with: line.index(colon, offsetBy: 2) ..< (lineEnd ?? line.endIndex))
+			return (key, value)
+		} else {
+			let lineEnd = line.rangeOfCharacter(from: .newlines)?.lowerBound
+			return (line.substring(to: lineEnd ?? line.endIndex), nil)
+		}
+	}
 
     fileprivate func parseRetryTime(_ eventString: String) -> Int? {
         var reconnectTime: Int?

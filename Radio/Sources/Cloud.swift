@@ -12,6 +12,8 @@ func coupleCloud(to radio: Radio) {
 			} catch {
 				assert(false)
 			}
+		} else {
+			print("could not parse json")
 		}
 	}
 }
