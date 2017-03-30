@@ -1,11 +1,3 @@
-//
-//  String UnsafePointer.swift
-//  Radio
-//
-//  Created by Damiaan on 29/03/17.
-//
-//
-
 import Cmpv
 import Dispatch
 
@@ -42,6 +34,10 @@ class Radio {
 	
 	func increaseVolume(value: Int8 = 2) throws {
 		try Radio.execute(mpv_command_string(handle, "add volume \(value)"))
+	}
+	
+	func decreaseVolume(value: Int8 = 2) throws {
+		try increaseVolume(value: -value)
 	}
 }
 
