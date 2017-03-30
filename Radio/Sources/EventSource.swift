@@ -299,19 +299,17 @@ open class EventSource: NSObject, URLSessionDataDelegate {
         var event = Dictionary<String, String>()
 
         for line in eventString.components(separatedBy: CharacterSet.newlines) as [String] {
-            autoreleasepool {
-                let (key, value) = self.parseKeyValuePair(line)
+			let (key, value) = self.parseKeyValuePair(line)
 
-                if key != nil && value != nil {
-                    if event[key as! String] != nil {
-                        event[key as! String] = "\(event[key as! String]!)\n\(value!)"
-                    } else {
-                        event[key as! String] = value! as String
-                    }
-                } else if key != nil && value == nil {
-                    event[key as! String] = ""
-                }
-            }
+			if key != nil && value != nil {
+				if event[key as! String] != nil {
+					event[key as! String] = "\(event[key as! String]!)\n\(value!)"
+				} else {
+					event[key as! String] = value! as String
+				}
+			} else if key != nil && value == nil {
+				event[key as! String] = ""
+			}
         }
 
         return (event["id"], event["event"], event["data"])
