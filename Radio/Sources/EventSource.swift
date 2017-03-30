@@ -1,11 +1,4 @@
-//
-//  EventSource.swift
-//  EventSource
-//
-//  Created by Andres on 2/13/15.
-//  Copyright (c) 2015 Inaka. All rights reserved.
-//
-
+import Dispatch
 import Foundation
 
 public enum EventSourceState {
@@ -55,7 +48,7 @@ open class EventSource: NSObject, URLSessionDataDelegate {
 		let relativePath = self.url.relativePath
 		let host = self.url.host ?? ""
 
-		self.uniqueIdentifier = "\(self.url.scheme).\(host).\(port).\(relativePath)"
+		self.uniqueIdentifier = "\(String(describing: self.url.scheme)).\(host).\(port).\(relativePath)"
 		self.lastEventIDKey = "\(EventSource.DefaultsKey).\(self.uniqueIdentifier)"
 
         super.init()
@@ -74,8 +67,8 @@ open class EventSource: NSObject, URLSessionDataDelegate {
         additionalHeaders["Cache-Control"] = "no-cache"
 
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = TimeInterval(INT_MAX)
-        configuration.timeoutIntervalForResource = TimeInterval(INT_MAX)
+        configuration.timeoutIntervalForRequest = TimeInterval(Int32.max)
+        configuration.timeoutIntervalForResource = TimeInterval(Int32.max)
         configuration.httpAdditionalHeaders = additionalHeaders
 
         self.readyState = EventSourceState.connecting
@@ -184,8 +177,8 @@ open class EventSource: NSObject, URLSessionDataDelegate {
 		}
 
         if error == nil || (error as! NSError).code != -999 {
-            let nanoseconds = Double(self.retryTime) / 1000.0 * Double(NSEC_PER_SEC)
-            let delayTime = DispatchTime.now() + Double(Int64(nanoseconds)) / Double(NSEC_PER_SEC)
+            let nanoseconds = Double(self.retryTime) / 1000.0
+            let delayTime = DispatchTime.now() + nanoseconds
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.connect()
             }
@@ -195,7 +188,7 @@ open class EventSource: NSObject, URLSessionDataDelegate {
             if let errorCallback = self.onErrorCallback {
                 errorCallback(error as NSError?)
             } else {
-                self.errorBeforeSetErrorCallBack = error as? NSError
+                self.errorBeforeSetErrorCallBack = error as NSError?
             }
         }
     }
@@ -213,7 +206,8 @@ open class EventSource: NSObject, URLSessionDataDelegate {
                 let dataChunk = receivedDataBuffer.subdata(
 					with: NSRange(location: searchRange.location, length: foundRange.location - searchRange.location)
                 )
-                events.append(NSString(data: dataChunk, encoding: String.Encoding.utf8.rawValue) as! String)
+				
+                events.append(String(data: dataChunk, encoding: .utf8)!)
             }
             // Search for next occurrence of delimiter
             searchRange.location = foundRange.location + foundRange.length
