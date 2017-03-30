@@ -12,9 +12,9 @@ open class EventSource: NSObject, URLSessionDataDelegate {
 
     let url: URL
 	fileprivate let lastEventIDKey: String
-    fileprivate let receivedString: NSString?
+    fileprivate let receivedString: String?
     fileprivate var onOpenCallback: ((Void) -> Void)?
-    fileprivate var onErrorCallback: ((NSError?) -> Void)?
+    fileprivate var onErrorCallback: ((Error?) -> Void)?
     fileprivate var onMessageCallback: ((_ id: String?, _ event: String?, _ data: String?) -> Void)?
     open internal(set) var readyState: EventSourceState
     open fileprivate(set) var retryTime = 3000
@@ -23,7 +23,7 @@ open class EventSource: NSObject, URLSessionDataDelegate {
     internal var urlSession: Foundation.URLSession?
     internal var task: URLSessionDataTask?
     fileprivate var operationQueue: OperationQueue
-    fileprivate var errorBeforeSetErrorCallBack: NSError?
+    fileprivate var errorBeforeSetErrorCallBack: Error?
     internal let receivedDataBuffer: NSMutableData
 	fileprivate let uniqueIdentifier: String
     fileprivate let validNewlineCharacters = ["\r\n", "\n", "\r"]
@@ -113,7 +113,7 @@ open class EventSource: NSObject, URLSessionDataDelegate {
         self.onOpenCallback = onOpenCallback
     }
 
-    open func onError(_ onErrorCallback: @escaping ((NSError?) -> Void)) {
+    open func onError(_ onErrorCallback: @escaping ((Error?) -> Void)) {
         self.onErrorCallback = onErrorCallback
 
         if let errorBeforeSet = self.errorBeforeSetErrorCallBack {
