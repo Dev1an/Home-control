@@ -11,10 +11,10 @@ do {
 		try radio.setChannel(to: radioMaria)
 	} catch RadioError.Mpv(let message) {
 		print("Unable to play radio maria")
+		print(message)
 	}
 	
 	couple(remote: device, to: radio)
-	coupleCloud(to: radio)
 	
 } catch RadioError.Mpv(let message) {
 	print("Unable to initialise radio")
