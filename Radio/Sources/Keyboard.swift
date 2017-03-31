@@ -4,6 +4,17 @@ let radioMaria = "http://stream.radiomaria.be/RadioMaria-96.m3u"
 let klaraContinuo = "http://mp3.streampower.be/klaracontinuo-high.mp3"
 
 func couple(remote: String, to radio: Radio) {
+	func handleVolume(with keycode: UInt16) throws {
+		switch keycode {
+		case 103:
+			try radio.increaseVolume(value: 10)
+		case 108:
+			try radio.decreaseVolume(value: 10)
+		default:
+			break
+		}
+	}
+
 	do {
 		print("trying to start keyboard observer")
 		let keyboard = try InputEventCenter(devicePath: remote)
@@ -30,17 +41,6 @@ func couple(remote: String, to radio: Radio) {
 		print("\t>", reason)
 	} catch {
 		assert(false)
-	}
-	
-	func handleVolume(with keycode: UInt16) throws {
-		switch keycode {
-		case 103:
-			try radio.increaseVolume(value: 10)
-		case 108:
-			try radio.decreaseVolume(value: 10)
-		default:
-			break
-		}
 	}
 }
 
