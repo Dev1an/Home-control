@@ -20,13 +20,19 @@ swift package generate-xcodeproj
 
 ## Build
 
-**Debug**
+**Update packages**
+
+```shell
+swift package update
+```
+
+**build for debugging**
 
 ```shell
 swift build
 ```
 
-**Release**
+**build release**
 
 ```shell
 swift build -c release
