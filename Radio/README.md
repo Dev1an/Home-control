@@ -21,7 +21,7 @@ swift package generate-xcodeproj
 ## Build
 
 **Update packages**
-
+Since the /Packages directory is ignored by git, one has to manually update dependencies after pulling new commits from github.
 ```shell
 swift package update
 ```
