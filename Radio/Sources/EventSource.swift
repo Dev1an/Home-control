@@ -222,7 +222,6 @@ open class EventSource: NSObject, URLSessionDataDelegate {
 	fileprivate func searchForEventInRange(_ searchRange: Range<Data.Index>) -> Range<Data.Index>? {
 		let delimiters = validNewlineCharacters.map { "\($0)\($0)".data(using: String.Encoding.utf8)! }
 		
-		String(data: receivedDataBuffer, encoding: .utf8)
 		for delimiter in delimiters {
 			if let foundRange = receivedDataBuffer.range(of: delimiter,
 			                                          options: NSData.SearchOptions(),
