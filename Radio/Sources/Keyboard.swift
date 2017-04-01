@@ -31,7 +31,7 @@ func couple(remote: String, to radio: Radio) {
 					try handleVolume(with: keycode)
 				default:
 					if let channel = preset[keycode] {
-						try radio.setChannel(to: rcfBxl)
+						try radio.setChannel(to: channel)
 					}
 				}
 			}

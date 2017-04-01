@@ -1,7 +1,7 @@
 import EventSource
 
 func coupleCloud(to radio: Radio) {
-	EventStream(from: "https://homecontrol-f0066.firebaseio.com/Home/0/Radio/0/currentChannel.json") { (event, data) in
+	let _ = EventStream(from: "https://homecontrol-f0066.firebaseio.com/Home/0/Radio/0/currentChannel.json") { (event, data) in
 		if event == "put" {
 			if let url = Update(json: data)?.data as? String {
 				do {
