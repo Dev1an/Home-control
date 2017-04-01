@@ -1,6 +1,12 @@
 import Cmpv
 import Dispatch
 
+let rcfBxl = "http://rcf.streamakaci.com/rcfbruxelles.mp3"
+let rcfVendee = "http://rcf.streamakaci.com/rcf85.mp3"
+let radioMaria = "http://stream.radiomaria.be/RadioMaria-96.m3u"
+let radioMariaNL = "http://87.233.180.73:8000/listen.pls"
+let klaraContinuo = "http://mp3.streampower.be/klaracontinuo-high.mp3"
+
 class Radio {
 	static let loadFile = "loadfile"
 	

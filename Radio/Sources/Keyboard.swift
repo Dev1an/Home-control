@@ -1,45 +1,43 @@
 import InputEvents
 
-let rcfBxl = "http://rcf.streamakaci.com/rcfbruxelles.mp3"
-let rcfVendee = "http://rcf.streamakaci.com/rcf85.mp3"
-let radioMaria = "http://stream.radiomaria.be/RadioMaria-96.m3u"
-let klaraContinuo = "http://mp3.streampower.be/klaracontinuo-high.mp3"
+var preset: [UInt16: String] = [
+	59: rcfBxl,
+	60: rcfVendee,
+	61: radioMaria,
+	62: radioMariaNL,
+	63: klaraContinuo
+]
 
 func couple(remote: String, to radio: Radio) {
-	func handleVolume(with keycode: UInt16) throws {
+	func handleVolume(with keycode: UInt16, step: Int8 = 10) throws {
 		switch keycode {
 		case 103:
-			try radio.increaseVolume(value: 10)
+			try radio.increaseVolume(value: step)
 		case 108:
-			try radio.decreaseVolume(value: 10)
+			try radio.decreaseVolume(value: step)
 		default:
 			break
 		}
 	}
 
 	do {
-		print("trying to start keyboard observer")
 		let keyboard = try InputEventCenter(devicePath: remote)
 		keyboard.keyPressed = { keycode in
 			radioInteraction {
 				switch keycode {
-				case 59:
-					try radio.setChannel(to: rcfBxl)
-				case 60:
-					try radio.setChannel(to: rcfVendee)
-				case 61:
-					try radio.setChannel(to: radioMaria)
-				case 63:
-					try radio.setChannel(to: klaraContinuo)
 				case 14:
 					try radio.stop()
-				default:
+				case 103, 108:
 					try handleVolume(with: keycode)
+				default:
+					if let channel = preset[keycode] {
+						try radio.setChannel(to: rcfBxl)
+					}
 				}
 			}
 		}
 		keyboard.keyRepeated = { keycode in
-			radioInteraction { try handleVolume(with: keycode) }
+			radioInteraction { try handleVolume(with: keycode, step: 2) }
 		}
 	} catch KeyboardError.CannotOpen(let fileDescriptor, let reason) {
 		print("An error occured while trying to observe the keyboard:")
