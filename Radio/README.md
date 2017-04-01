@@ -7,7 +7,7 @@ It uses `<linux/input.h>` to catch global keyboard events, so it only works on L
 
 - [Swift](https://swift.org/download/#releases)
 - [libmpv](https://mpv.io)
-  - Ubuntu: `sudo apt install libmpv-dev`
+  - Ubuntu: `sudo apt install libmpv-dev libssl-dev libcurl4-openssl-dev uuid-dev `
   - macOS: `brew install mpv`
 
 ## Develop
