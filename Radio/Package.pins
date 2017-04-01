@@ -8,16 +8,64 @@
       "version": "1.0.0"
     },
     {
+      "package": "COpenSSL",
+      "reason": null,
+      "repositoryURL": "https://github.com/PerfectlySoft/Perfect-COpenSSL.git",
+      "version": "2.0.4"
+    },
+    {
       "package": "Cmpv",
       "reason": null,
       "repositoryURL": "https://github.com/Dev1an/Cmpv",
       "version": "1.0.0"
     },
     {
+      "package": "EventSource",
+      "reason": null,
+      "repositoryURL": "https://github.com/Dev1an/EventSource.git",
+      "version": "1.0.1"
+    },
+    {
       "package": "InputEvents",
       "reason": null,
       "repositoryURL": "https://github.com/Dev1an/InputEvents",
       "version": "1.0.4"
+    },
+    {
+      "package": "PerfectCURL",
+      "reason": null,
+      "repositoryURL": "https://github.com/Dev1an/Perfect-CURL.git",
+      "version": "2.0.8"
+    },
+    {
+      "package": "PerfectCrypto",
+      "reason": null,
+      "repositoryURL": "https://github.com/PerfectlySoft/Perfect-Crypto.git",
+      "version": "1.0.8"
+    },
+    {
+      "package": "PerfectLib",
+      "reason": null,
+      "repositoryURL": "https://github.com/PerfectlySoft/PerfectLib.git",
+      "version": "2.0.9"
+    },
+    {
+      "package": "PerfectNet",
+      "reason": null,
+      "repositoryURL": "https://github.com/PerfectlySoft/Perfect-Net.git",
+      "version": "2.1.7"
+    },
+    {
+      "package": "PerfectThread",
+      "reason": null,
+      "repositoryURL": "https://github.com/PerfectlySoft/Perfect-Thread.git",
+      "version": "2.0.9"
+    },
+    {
+      "package": "cURL",
+      "reason": null,
+      "repositoryURL": "https://github.com/PerfectlySoft/Perfect-libcurl.git",
+      "version": "2.0.1"
     }
   ],
   "version": 1

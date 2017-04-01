@@ -15,6 +15,7 @@ do {
 	}
 	
 	couple(remote: device, to: radio)
+	coupleCloud(to: radio)
 	
 } catch RadioError.Mpv(let message) {
 	print("Unable to initialise radio")
