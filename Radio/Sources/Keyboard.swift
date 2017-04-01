@@ -1,5 +1,7 @@
 import InputEvents
 
+let rcfBxl = "http://rcf.streamakaci.com/rcfbruxelles.mp3"
+let rcfVendee = "http://rcf.streamakaci.com/rcf85.mp3"
 let radioMaria = "http://stream.radiomaria.be/RadioMaria-96.m3u"
 let klaraContinuo = "http://mp3.streampower.be/klaracontinuo-high.mp3"
 
@@ -21,10 +23,14 @@ func couple(remote: String, to radio: Radio) {
 		keyboard.keyPressed = { keycode in
 			radioInteraction {
 				switch keycode {
+				case 59:
+					try radio.setChannel(to: rcfBxl)
 				case 60:
-					try radio.setChannel(to: klaraContinuo)
+					try radio.setChannel(to: rcfVendee)
 				case 61:
 					try radio.setChannel(to: radioMaria)
+				case 63:
+					try radio.setChannel(to: klaraContinuo)
 				case 14:
 					try radio.stop()
 				default:
