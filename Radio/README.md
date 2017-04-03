@@ -13,7 +13,7 @@ It uses `<linux/input.h>` to catch global keyboard events, so it only works on L
 
     - `sudo apt-get install clang`
     
-    - put path in ~/.profile `PATH=/home/michel/Documents/swift/usr/bin/swift:"${PATH}"`
+    - put path in ~/.profile `PATH=/home/michel/Documents/swift/usr/bin:"${PATH}"`
     
 - [libmpv](https://mpv.io)
   - Ubuntu: `sudo apt install libmpv-dev libssl-dev libcurl4-openssl-dev uuid-dev `
