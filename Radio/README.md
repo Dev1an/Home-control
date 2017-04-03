@@ -12,7 +12,9 @@ It uses `<linux/input.h>` to catch global keyboard events, so it only works on L
     - download https://www.dropbox.com/s/cah35gf5ap22d11/swift-3.0.2-RPi23-1604.tgz
 
     - `sudo apt-get install clang`
-
+    
+    - put path in ~/.profile `PATH=/home/michel/Documents/swift/usr/bin/swift:"${PATH}"`
+    
 - [libmpv](https://mpv.io)
   - Ubuntu: `sudo apt install libmpv-dev libssl-dev libcurl4-openssl-dev uuid-dev `
   - macOS: `brew install mpv`
