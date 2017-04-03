@@ -1,11 +1,12 @@
 import InputEvents
 
 var preset: [UInt16: String] = [
-	59: rcfBxl,
-	60: rcfVendee,
-	61: radioMaria,
-	62: radioMariaNL,
-	63: klaraContinuo
+	59: rcfVendee,
+	60: radioMaria,
+	61: radioMariaNL,
+	62: klaraContinuo,
+	63: radioCourtoisie,
+	64: rcfBxl
 ]
 
 func couple(remote: String, to radio: Radio) {
