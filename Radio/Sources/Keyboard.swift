@@ -26,9 +26,11 @@ func couple(remote: String, to radio: Radio) {
 		keyboard.keyPressed = { keycode in
 			radioInteraction {
 				switch keycode {
-				case 14:
-					try radio.pause()
-				case 103, 108:
+                case 14: //Backspace
+					try radio.stop()
+                case 57: //Space bar
+                    try radio.pause()
+				case 103, 108: //up, down
 					try handleVolume(with: keycode)
 				default:
 					if let channel = preset[keycode] {
