@@ -27,7 +27,7 @@ func couple(remote: String, to radio: Radio) {
 			radioInteraction {
 				switch keycode {
 				case 14:
-					try radio.stop()
+					try radio.pause()
 				case 103, 108:
 					try handleVolume(with: keycode)
 				default:

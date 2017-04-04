@@ -39,6 +39,10 @@ class Radio {
 		try Radio.execute(mpv_command_string(handle, "stop"))
 	}
 	
+	func pause() throws {
+		try Radio.execute(mpv_command_string(handle, "cycle pause"))
+	}
+	
 	func increaseVolume(value: Int8 = 2) throws {
 		try Radio.execute(mpv_command_string(handle, "add volume \(value)"))
 	}
