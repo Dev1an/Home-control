@@ -1,19 +1,19 @@
 import InputEvents
 
-var preset: [UInt16: String] = [
-	59: rcfBxl,
-	60: rcfVendee,
-	61: radioMaria,
-	62: radioMariaNL,
-	63: klaraContinuo
+var preset: [Key: String] = [
+	.f1: rcfBxl,
+	.f2: rcfVendee,
+	.f3: radioMaria,
+	.f4: radioMariaNL,
+	.f5: klaraContinuo
 ]
 
 func couple(remote: String, to radio: Radio) {
-	func handleVolume(with keycode: UInt16, step: Int8 = 10) throws {
+	func handleVolume(with keycode: Key, step: Int8 = 10) throws {
 		switch keycode {
-		case 103:
+		case .upArrow:
 			try radio.increaseVolume(value: step)
-		case 108:
+		case .downArrow:
 			try radio.decreaseVolume(value: step)
 		default:
 			break
@@ -25,9 +25,9 @@ func couple(remote: String, to radio: Radio) {
 		keyboard.keyPressed = { keycode in
 			radioInteraction {
 				switch keycode {
-				case 14:
+				case .escape:
 					try radio.stop()
-				case 103, 108:
+				case .upArrow, .downArrow:
 					try handleVolume(with: keycode)
 				default:
 					if let channel = preset[keycode] {
