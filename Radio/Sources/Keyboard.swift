@@ -1,11 +1,12 @@
 import InputEvents
 
 var preset: [Key: String] = [
-	.f1: rcfBxl,
-	.f2: rcfVendee,
-	.f3: radioMaria,
-	.f4: radioMariaNL,
-	.f5: klaraContinuo
+	.f1: rcfVendee,
+	.f2: radioMaria,
+	.f3: radioMariaNL,
+	.f4: klaraContinuo,
+	.f5: radioCourtoisie,
+	.f6: rcfBxl
 ]
 
 func couple(remote: String, to radio: Radio) {
@@ -22,15 +23,17 @@ func couple(remote: String, to radio: Radio) {
 
 	do {
 		let keyboard = try InputEventCenter(devicePath: remote)
-		keyboard.keyPressed = { keycode in
+		keyboard.keyPressed = { key in
 			radioInteraction {
-				switch keycode {
+				switch key {
 				case .escape:
 					try radio.stop()
+                case .space:
+                    try radio.pause()
 				case .upArrow, .downArrow:
-					try handleVolume(with: keycode)
+					try handleVolume(with: key)
 				default:
-					if let channel = preset[keycode] {
+					if let channel = preset[key] {
 						try radio.setChannel(to: channel)
 					}
 				}
