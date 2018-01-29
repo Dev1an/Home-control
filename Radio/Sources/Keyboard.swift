@@ -28,8 +28,8 @@ func couple(remote: String, to radio: Radio) {
 				switch key {
 				case .escape:
 					try radio.stop()
-                case .space:
-                    try radio.pause()
+				case .space:
+					try radio.pause()
 				case .upArrow, .downArrow:
 					try handleVolume(with: key)
 				default:
