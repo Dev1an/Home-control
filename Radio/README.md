@@ -19,11 +19,13 @@ A command-line internet radio player.
 
 ## Develop
 
-Generate xcode project to develop in Xcode
+Generate xcode project to develop in Xcode.
 
 ```shell
 swift package generate-xcodeproj
 ```
+
+The generated project is only known to work in Xcode 8. Xcode 9 fails to build projects generated with this command.
 
 ## Build
 
