@@ -1,4 +1,5 @@
 import Cmpv
+import Foundation
 import Dispatch
 
 let rcfBxl = "http://rcf.streamakaci.com/rcfbruxelles.mp3"
@@ -26,7 +27,7 @@ class Radio {
 		queue.async {
 			while true {
 				let eventID = mpv_wait_event(self.handle, Double.greatestFiniteMagnitude).pointee.event_id.rawValue
-				print("mpv:", Event(rawValue: eventID) ?? "Unknown event")
+				print("[\(Date())] mpv:", Event(rawValue: eventID) ?? "Unknown event")
 			}
 		}
 	}
